@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل الاستقلالية — جمعيات المنطقة الشرقية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rakkas&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#F6F1E4;
+    --sand-deep:#EEE6D2;
+    --teal:#0E4749;
+    --teal-deep:#092E30;
+    --gold:#B98A2B;
+    --ink:#1E2521;
+    --green:#3E7A4E;
+    --green-bg:#E9F1EA;
+    --red:#9C3B2E;
+    --red-bg:#F5E9E6;
+    --gray:#8A8478;
+    --gray-bg:#EFECE4;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'IBM Plex Sans Arabic',sans-serif;
+    font-weight:400;
+    line-height:1.7;
+  }
+  h1,h2,.display{
+    font-family:'Rakkas',serif;
+    font-weight:400;
+  }
+  a{color:inherit;}
+
+  /* ---------- pearl-strand divider ---------- */
+  .pearl-divider{
+    width:100%;
+    height:18px;
+    background-image:radial-gradient(circle, var(--gold) 2.5px, transparent 3px);
+    background-size:22px 18px;
+    background-repeat:repeat-x;
+    background-position:center;
+    opacity:.55;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    background:linear-gradient(180deg, var(--teal-deep), var(--teal) 70%);
+    color:var(--sand);
+    padding:56px 24px 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(185,138,43,.18), transparent 40%),
+      radial-gradient(circle at 8% 90%, rgba(185,138,43,.14), transparent 45%);
+    pointer-events:none;
+  }
+  .header-inner{max-width:1080px;margin:0 auto;position:relative;}
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:.06em;
+    color:var(--gold);
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  header h1{
+    font-size:clamp(34px,5vw,54px);
+    margin:0 0 14px;
+    color:#fff;
+  }
+  header p.lead{
+    max-width:620px;
+    font-size:16px;
+    color:#DDEAE8;
+    margin:0 0 30px;
+  }
+  .stats-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:8px;
+  }
+  .stat-pill{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:12px;
+    padding:12px 18px;
+    min-width:120px;
+  }
+  .stat-pill .num{font-size:26px;font-weight:700;font-family:'IBM Plex Sans Arabic';}
+  .stat-pill .lbl{font-size:12.5px;color:#C9DAD8;margin-top:2px;}
+  .stat-pill.green .num{color:#8FD3A0;}
+  .stat-pill.red .num{color:#E8A69A;}
+  .stat-pill.gray .num{color:#C7C2B5;}
+
+  /* ---------- controls ---------- */
+  .controls{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(246,241,228,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--sand-deep);
+    padding:16px 24px;
+  }
+  .controls-inner{
+    max-width:1080px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+  }
+  #search{
+    flex:1 1 220px;
+    padding:10px 16px;
+    border-radius:999px;
+    border:1px solid var(--sand-deep);
+    background:#fff;
+    font-family:inherit;
+    font-size:14px;
+    color:var(--ink);
+  }
+  #search:focus{outline:2px solid var(--gold);outline-offset:1px;}
+  .chip-group{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    border:1px solid var(--sand-deep);
+    background:#fff;
+    color:var(--ink);
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:13.5px;
+    cursor:pointer;
+    font-family:inherit;
+    transition:.15s;
+  }
+  .chip:hover{border-color:var(--gold);}
+  .chip.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+  .chip.active.c-green{background:var(--green);border-color:var(--green);}
+  .chip.active.c-red{background:var(--red);border-color:var(--red);}
+  .chip.active.c-gray{background:var(--gray);border-color:var(--gray);}
+  .chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+  /* ---------- legend ---------- */
+  .legend{
+    max-width:1080px;margin:20px auto 0;padding:0 24px;
+    display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:#5b5b52;
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block;}
+  .dot.green{background:var(--green);}
+  .dot.red{background:var(--red);}
+  .dot.gray{background:var(--gray);}
+
+  /* ---------- city sections ---------- */
+  main{max-width:1080px;margin:0 auto;padding:20px 24px 80px;}
+  .city-section{margin-top:46px;}
+  .city-title{
+    font-size:26px;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:4px;
+  }
+  .city-title .count{font-family:'IBM Plex Sans Arabic';font-size:13px;color:var(--gray);font-weight:500;}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:16px;
+    margin-top:18px;
+  }
+
+  /* ---------- card ---------- */
+  .card{
+    background:#fff;
+    border-radius:14px;
+    border-right:6px solid var(--gray);
+    box-shadow:0 1px 3px rgba(20,20,10,.06);
+    padding:18px 20px;
+    cursor:pointer;
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    transition:.15s transform, .15s box-shadow;
+    text-align:right;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,20,10,.10);}
+  .card:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .card.green{border-color:var(--green);}
+  .card.red{border-color:var(--red);}
+  .card.gray{border-color:var(--gray);}
+
+  .seal{
+    flex:0 0 auto;
+    width:48px;height:48px;border-radius:13px;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;
+    background:var(--gray);
+    position:relative;
+    order:2; /* place on the right in RTL flex */
+    box-shadow:0 2px 6px rgba(20,20,10,.15);
+  }
+  .seal svg{width:22px;height:22px;}
+  .seal::before{
+    content:"";
+    position:absolute;inset:-4px;
+    border-radius:16px;
+    border:1.5px dotted rgba(0,0,0,.14);
+  }
+  .card.green .seal{background:var(--green);}
+  .card.red .seal{background:var(--red);}
+  .card.gray .seal{background:var(--gray);}
+
+  .card-body{flex:1 1 auto;order:1;min-width:0;}
+  .card-body h3{
+    font-family:'IBM Plex Sans Arabic';
+    font-size:16px;
+    font-weight:600;
+    margin:0 0 6px;
+  }
+  .badge{
+    display:inline-block;
+    font-size:11.5px;
+    padding:3px 10px;
+    border-radius:999px;
+    margin-bottom:8px;
+    font-weight:600;
+  }
+  .badge.green{background:var(--green-bg);color:var(--green);}
+  .badge.red{background:var(--red-bg);color:var(--red);}
+  .badge.gray{background:var(--gray-bg);color:var(--gray);}
+  .teaser{
+    font-size:13px;
+    color:#5b5b52;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .no-results{
+    padding:40px 0;text-align:center;color:var(--gray);font-size:15px;
+  }
+
+  /* ---------- modal ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(9,46,48,.55);
+    display:none;align-items:center;justify-content:center;
+    padding:20px;z-index:100;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:#fff;max-width:560px;width:100%;
+    border-radius:18px;padding:0;overflow:hidden;
+    max-height:86vh;display:flex;flex-direction:column;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+  }
+  .modal-head{
+    padding:26px 26px 18px;
+    display:flex;gap:16px;align-items:flex-start;
+    border-bottom:1px solid var(--sand-deep);
+  }
+  .modal-head .seal{width:60px;height:60px;order:0;}
+  .modal-head .seal svg{width:28px;height:28px;}
+  .modal-head h2{font-family:'IBM Plex Sans Arabic';font-size:19px;font-weight:700;margin:0 0 6px;line-height:1.4;}
+  .modal-close{
+    margin-inline-start:auto;background:none;border:none;font-size:22px;
+    cursor:pointer;color:var(--gray);line-height:1;padding:4px;
+  }
+  .modal-close:focus-visible{outline:2px solid var(--gold);}
+  .modal-body{padding:22px 26px;overflow-y:auto;}
+  .kv{display:flex;gap:8px;font-size:13.5px;margin-bottom:10px;}
+  .kv .k{color:var(--gray);flex:0 0 90px;}
+  .modal-body .quote{
+    background:var(--sand);
+    border-right:3px solid var(--gold);
+    padding:14px 16px;
+    border-radius:8px;
+    font-size:14px;
+    margin:14px 0;
+    color:#3a3a33;
+  }
+  .modal-actions{
+    padding:18px 26px 26px;
+    display:flex;gap:10px;flex-wrap:wrap;
+    border-top:1px solid var(--sand-deep);
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:10px 18px;border-radius:999px;font-size:14px;
+    text-decoration:none;font-weight:600;
+    border:1px solid var(--sand-deep);
+  }
+  .btn.primary{background:var(--teal);color:#fff;border-color:var(--teal);}
+  .btn.secondary{background:#fff;color:var(--ink);}
+  .caveat-flag{
+    font-size:12.5px;color:var(--red);background:var(--red-bg);
+    padding:6px 10px;border-radius:8px;margin-top:10px;
+  }
+
+  /* ---------- methodology / footer ---------- */
+  .method{
+    background:var(--sand-deep);
+    padding:50px 24px;
+  }
+  .method-inner{max-width:1080px;margin:0 auto;}
+  .method h2{font-size:24px;margin-bottom:14px;}
+  .method ul{padding-inline-start:20px;margin:0;font-size:14px;color:#4d4d44;}
+  .method li{margin-bottom:8px;}
+  footer{
+    background:var(--teal-deep);color:#B7CFCD;
+    text-align:center;padding:24px;font-size:12.5px;
+  }
+
+  @media (max-width:600px){
+    .stats-row{gap:8px;}
+    .stat-pill{padding:10px 14px;min-width:0;flex:1 1 45%;}
+    .card{flex-direction:row;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .card{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">مشروع بحثي · المنطقة الشرقية</div>
+    <h1>دليل الاستقلالية</h1>
+    <p class="lead">خريطة للجمعيات الخيرية في الدمام والخبر، مصنّفة حسب طبيعة ما تقدّمه للمستفيدين: برامج تبني استقلاليتهم (تدريب، تأهيل، توظيف، مشاريع مدرّة للدخل) مقابل مساعدة مالية أو عينية متكررة أو أي دعم آخر لا يحقق استقلالية اقتصادية (توعوي، نفسي، ديني تعليمي).</p>
+    <div class="stats-row" id="statsRow"></div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <input id="search" type="text" placeholder="ابحث باسم الجمعية أو المدينة…">
+    <div class="chip-group" id="classChips"></div>
+  </div>
+  <div class="controls-inner" style="margin-top:10px;">
+    <div class="chip-group" id="cityChips"></div>
+  </div>
+</div>
+
+<div class="legend">
+  <span><span class="dot green"></span> دعم استقلالية — تدريب / تأهيل / توظيف / مشاريع مدرّة للدخل</span>
+  <span><span class="dot red"></span> مساعدة مالية / عينية / أخرى — لا تحقق استقلالية اقتصادية</span>
+  <span><span class="dot gray"></span> غير محدد — يحتاج تحقق إضافي</span>
+</div>
+
+<main id="main"></main>
+
+<div class="method">
+  <div class="method-inner">
+    <h2>عن هذا الدليل</h2>
+    <ul>
+      <li>المصادر: منصة إحسان الوطنية (ehsan.sa)، دليل الكيانات بالمركز الوطني لتنمية القطاع غير الربحي (ncnp.gov.sa)، سعوديبيديا، المواقع الرسمية للجمعيات، ووكالة الأنباء السعودية.</li>
+      <li>التصنيف مبني على العبارات الحرفية المنشورة في المصدر عن برامج كل جمعية، لا على تخمين أو اسم الجمعية.</li>
+      <li>الجمعيات المصنّفة «غير محدد» لا تعني عدم وجود برامج استقلالية لديها، بل أن المصدر المتاح لم يوضح ذلك بثقة كافية — راجع الرابط الرسمي لكل جمعية قبل الاعتماد على التصنيف.</li>
+      <li>الجمعيات المدرجة هنا روجعت غالبيتها بتقارير سنوية أو صفحات برامج رسمية مباشرة من الجمعية نفسها، لا الاكتفاء بملف تعريفها على منصة إحسان فقط.</li>
+      <li>تصنيف «مساعدة مالية / أخرى» (الأحمر) يشمل أي خدمة لا تحقق استقلالية اقتصادية للمستفيد، سواء كانت مساعدة مالية/عينية متكررة، أو تعليمًا دينيًا (كحلقات تحفيظ القرآن)، أو دعمًا نفسيًا وتوعويًا (كورش الدعم النفسي لمرضى السرطان) — أي نشاط قيّم لكنه لا يصنّف تدريبًا مهنيًا أو تأهيلًا لسوق العمل أو مشروعًا مدرًا للدخل.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>آخر تحديث للبيانات: يوليو 2026 · دليل بحثي غير رسمي، يُنصح بالتحقق المباشر من كل جمعية قبل اتخاذ أي قرار.</footer>
+
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <div class="seal" id="modalSeal"></div>
+      <div style="flex:1;">
+        <h2 id="modalTitle"></h2>
+        <span class="badge" id="modalBadge"></span>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="إغلاق">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="kv"><span class="k">المدينة</span><span id="modalCity"></span></div>
+      <div class="kv" id="modalLicenseRow"><span class="k">رقم الترخيص</span><span id="modalLicense"></span></div>
+      <div class="quote" id="modalQuote"></div>
+      <div id="modalCaveat"></div>
+    </div>
+    <div class="modal-actions">
+      <a class="btn primary" id="modalLink" href="#" target="_blank" rel="noopener">زيارة موقع الجمعية ↗</a>
+      <a class="btn secondary" id="modalSource" href="#" target="_blank" rel="noopener">مصدر التصنيف ↗</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---------------- DATA ----------------
+// class: "green" (دعم استقلالية) | "red" (مساعدة مالية / أخرى) | "gray" (غير محدد)
+const DATA = [
+{name:"جمعية البر بالمنطقة الشرقية",city:"الدمام",cls:"green",license:"24",url:"https://alber.org.sa/",sourceUrl:"https://www.spa.gov.sa/a158538c3fb",
+  quote:"قدّمت الجمعية قروضًا تنموية حسنة لدعم المشاريع الصغيرة والمتوسطة لـ2443 مستفيدًا بقيمة إجمالية 29.4 مليون ريال، إلى جانب برامج تدريب وتأهيل منتهية بالتوظيف ومنح جامعية ودعم تعليمي ووظيفي.",caveat:""},
+{name:"جمعية البركة الخيرية للخدمات الاجتماعية",city:"الدمام",cls:"green",license:"",url:"https://albarakah.org.sa/",sourceUrl:"https://albarakah.org.sa/",
+  quote:"بحسب التقرير السنوي 2025م، مكّنت الجمعية أكثر من 657 مستفيدًا عبر عدة برامج: تدريب منتهٍ بالتوظيف (95 موظّفًا)، برنامج ريادة لدعم المشاريع (141 مستفيدًا)، منح دراسية (111 مقعدًا دراسيًا)، إضافة إلى تسليم وحدات سكنية (71 مستفيدًا).",caveat:""},
+{name:"جمعية مبرة الإحسان الأهلية",city:"الخبر",cls:"green",license:"1000716900",url:"https://ehsan-m.sa/",sourceUrl:"https://ehsan-m.sa/",
+  quote:"بحسب التقرير السنوي 2025م (نطاق عملها الفعلي أحياء محافظة الخبر لا الدمام)، شملت برامجها «مبادرة التدريب المبتدئ بالتوظيف ودبلوم السلامة والصحة المهنية» بالتعاون مع أكاديمية التعلم وشركة الجبيل (16 مستفيدًا من المنح التدريبية)، إضافة إلى 390 مستفيدًا من برنامج تفريج الكرب، وخدمات عينية أخرى (سلال غذائية، سداد كهرباء وإيجارات) لإجمالي 520 أسرة و3224 فردًا مستفيدًا خلال 2025م.",caveat:""},
+{name:"مبرة دار الخير",city:"الدمام",cls:"red",license:"",url:"https://www.daralkhair.org.sa/",sourceUrl:"https://www.daralkhair.org.sa/news/الجمعيات-الخيرية-في-الدمام/",
+  quote:"توزيع المستلزمات الأساسية والأثاث للمحتاجين، دون ذكر لبرامج تدريب أو تأهيل على الموقع الرسمي.",caveat:""},
+{name:"جمعية الرحمة الطبية الخيرية",city:"الدمام",cls:"red",license:"300",url:"https://rahmah.sa/",sourceUrl:"https://rahmah.sa/",
+  quote:"بحسب صفحة «البرامج والمشاريع» بموقعها الرسمي، تنحصر برامجها في: برامج الرعاية الطبية (علاج ودواء وجهاز طبي للمرضى المحتاجين)، برامج التثقيف الصحي، البرامج الاجتماعية الصحية، ومشاريع المسؤولية الاجتماعية مع الشركاء — جميعها خدمات علاجية/توعوية وليست برامج تدريب أو تأهيل أو توظيف أو مشاريع مدرّة للدخل.",caveat:""},
+{name:"جمعية نور للدعوة والإرشاد",city:"الدمام",cls:"red",license:"",url:"https://dwd.org.sa/",sourceUrl:"https://dwd.org.sa/",
+  quote:"بعد المراجعة المباشرة لمحتوى موقعها الرسمي، خدماتها الفعلية تنحصر في مساعدات مالية وعينية للمحتاجين دون برامج تدريب أو تأهيل أو توظيف أو مشاريع مدرّة للدخل.",caveat:""},
+{name:"جمعية جود النسائية الخيرية بالدمام",city:"الدمام",cls:"green",license:"",url:"https://www.joud.org.sa/",sourceUrl:"https://www.dropbox.com/scl/fi/qi4zjq1awheg1fw9nxnv9/2025.pdf?rlkey=yr116rmxmmlv6ek2fdwef82sf&st=6zu3zwi8&dl=0",
+  quote:"بحسب التقرير السنوي 2025م، تقدّم الجمعية برامج تأهيل وتمكين حقيقية: دعم الدورات المهنية (8 برامج، 83 مستفيدًا)، دعم الأسر المنتجة (55 أسرة عبر 14 معرضًا)، برنامج «جديـر» لتأهيل سوق العمل (17 مستفيدًا)، وبرنامج «كفالة طالب علم» لدعم استكمال التعليم بعد الثانوية (26 طالبًا مكفولاً بقيمة 605,889 ريال)، إضافة إلى منصة «نون» للتعليم عن بُعد بالشراكة مع منصة إحسان. كما نظّمت «حفل صناع التغيير» الذي كرّم 23 خريجًا وخريجة، وقدّم 500 دورة تدريبية بالتعاون مع المعهد السعودي المتخصص للتدريب (SSTLI)، و5 فرص وظيفية بالشراكة مع جمعية طويق.",caveat:""},
+{name:"جمعية التنمية الأهلية بأحياء الصالحية وتوابعها",city:"الدمام",cls:"green",license:"",url:"https://alsalheyah.org.sa/",sourceUrl:"https://alsalheyah.org.sa/wp-content/uploads/sites/1616/2026/02/التقرير-السنوي-2025-المعتمد-1.pdf",
+  quote:"بحسب التقرير السنوي 2025م، تنظّم الجمعية برامج تدريبية (برنامج «شفاعة») بلغت 240 ساعة تدريبية، أثمرت عن 32 عقد عمل و63 مؤهّلاً لسوق العمل بنسبة رضا 97.3%. كما أطلقت محفظة تمويلية بالتعاون مع بنك التنمية الاجتماعية بقيمة 2,000,000 ريال لتمويل مشاريع صغيرة مدرّة للدخل (قروض ميسّرة بدعم غير مالي من إرشاد وتدريب)، استفادت منها 15 أسرة بقيمة قروض 680,000 ريال، من أمثلتها مشروع «قهوة سدو».",caveat:""},
+{name:"الجمعية الخيرية لتحفيظ القرآن الكريم بالشرقية",city:"الدمام",cls:"red",license:"",url:"https://quran-er.org.sa/",sourceUrl:"https://quran-er.org.sa/wp-content/uploads/2025/05/التقرير-السنوي-2024_compressed-1.pdf",
+  quote:"بحسب التقرير السنوي 2024م، أبرز برامجها حلقات تعليم وتحفيظ القرآن (حلق التحفيظ، التلقين، التجويد، الجاليات، الإصلاحيات، وبرنامجا «القرّاء» و«القارئ الصغير»). هذه برامج تعليمية دينية بحتة ولا تتضمن تدريبًا مهنيًا أو تأهيلًا لسوق العمل أو مشاريع مدرّة للدخل، فلا تحقق معيار «دعم الاستقلالية» رغم كونها تعليمية.",caveat:""},
+{name:"جمعية السرطان السعودية بالمنطقة الشرقية",city:"الدمام",cls:"red",license:"",url:"https://www.scf.org.sa/",sourceUrl:"https://www.scf.org.sa/news/",
+  quote:"بحسب صفحة الأخبار الرسمية، أنشطتها تتركز في الدعم النفسي والتوعوي والاجتماعي لمرضى السرطان: ورش فنية وحرفية للمريضات (رسم، صناعة أكواب طينية)، جلسات حوارية توعوية، تكريم متطوعين، وزيارات ودعم معنوي — أنشطة قيّمة لكنها دعم نفسي/توعوي وليست تدريبًا يؤدي لاستقلالية اقتصادية أو مشاريع مدرّة للدخل.",caveat:""},
+{name:"الجمعية الخيرية السعودية لتنشيط التبرع بالأعضاء بالمنطقة الشرقية (إيثار)",city:"الدمام",cls:"red",license:"",url:"https://www.eithar.org.sa/",sourceUrl:"https://www.eithar.org.sa/pages/البرامج-/",
+  quote:"بحسب صفحة «البرامج» الرسمية، تتركز أنشطة الجمعية في التوعية بالتبرع بالأعضاء والتنسيق والدعم المعنوي والصحي للمرضى وذويهم — برامج توعوية وصحية بحتة، دون تدريب مهني أو تأهيل لسوق العمل أو مشاريع مدرّة للدخل.",caveat:""},
+{name:"جمعية ود الخيرية للتنمية الاجتماعية",city:"الخبر",cls:"green",license:"548",url:"https://wud.org.sa/",sourceUrl:"https://wud.org.sa/public/static/1781517809_التقرير%20السنوي%20لبرامج%20وأنشطة%20جمعية%20ود%20الخيرية%202025م.pdf",
+  quote:"همة وعزم(2): تقديم فرص تدريب وتوظيف وجلسات حوارية للمستفيدين بحديقة خارجية لتعزيز مشاركة الشباب وفق رؤية 2030 (184 زائرًا)\nشباب ود: تمكين الشباب ببرامج تدريبية نوعية تعزز مسؤوليتهم المجتمعية وترفع جاهزيتهم لسوق العمل (26 مستفيدًا، 45 تسجيلاً)\nحرفة(2): مسابقة للحرفيين تكرّم أصحاب المراكز الأولى تمهيدًا لتدريب الأسر المستفيدة (8 مشاركين)\nديوانية الأثنينة: خدمة كبار السن بمكان صحي واجتماعي وثقافي مع ورش متنوعة (128 مستفيدة)\nلأجلي كوني واعية: تعزيز الوعي الصحي والاجتماعي وتطوير مهارات مواجهة تحديات الحياة الزوجية والأمومة (75 مستفيدة)\nزوارة فتيات: برنامج للفتيات 14-22 سنة لتعزيز مهاراتهن الاجتماعية والثقافية (22 فتاة)\nفرّحهم(5): مشاركة أسر الجمعية فرحة العيد بتقديم هدايا واحتفال (30 طفلاً)",caveat:""},
+{name:"جمعية فتاة الخليج الخيرية النسائية",city:"الخبر",cls:"green",license:"",url:"https://www.fatatalkhaleej.org.sa/",sourceUrl:"https://www.fatatalkhaleej.org.sa/rafed/uploads/website_annual_reports/697f13ffa0d33.pdf",
+  quote:"معرض إبداعات للجلابيات السنوي 24: منصة لمصممات ومصممي الجلابيات والعبايات لدعم الأسر المحتاجة وتمكين الأسر المنتجة وإبراز المصممات المبتدئات (برعاية الأميرة عبير بنت تركي آل سعود)\nمعرض تمكين وإلهام: مشاركة بالتعاون مع منشآت وشركة Air Liquide، معرض لتسويق منتجات الأسر المنتجة بمناسبة اليوم العالمي للمرأة\nورشة الخياطة والتطريز: زيادة الإنتاج خلال 3 أشهر استعدادًا للمشاركة في معارض تسويقية\nمعرض الحرف والأعمال اليدوية: أول مشاركة تسويقية لمنتجات ورشة الخياطة والتطريز، بمشاركة 7 أسر منتجة\nمعرض المصممين والمصممات (صنعتي) 2025: النسخة الثامنة، مشاركة لمدة 3 أيام لعرض وبيع منتجات يدوية\nدورة الطهي (الخامسة): بالتعاون مع الأكاديمية السعودية لفن الطهي «زادك»، تدريب 8 متدربات لمدة شهرين",caveat:""},
+{name:"الجمعية الخيرية لرعاية الأيتام بالمنطقة الشرقية (بناء)",city:"الخبر",cls:"green",license:"",url:"https://benaa.org.sa/",sourceUrl:"https://benaa.org.sa/ar/about/governance/?detail=التقارير-السنوية-للبرامج",
+  quote:"التأهيل والتوظيف: تنظيم 1330 دورة تدريبية عام 2025م (15,956 ساعة تدريبية)، ورفع متوسط دخل الأسرة الشهري إلى 5,319 ريال بعد التأهيل مقابل 3,195 ريال قبله\nالمشاريع الريادية: تأهيل تجاري (بناء) لـ54 مشروعًا ودعم 4 مشاريع تجارية لأمهات الأيتام عام 2025م، مع استفادة 11 من أمهات الأيتام من برامج تأهيل متخصصة في ريادة الأعمال\nدعم الأسر المنتجة: شراكة مع جمعية «وريف» لتمكين 50 أسرة و40 فتاة في ريادة الأعمال\nديبلوم تمكين الأمهات: بالشراكة مع جامعة الإمام عبدالرحمن بن فيصل، تدريب 50 مستفيدة عبر 42 دورة (204 ساعات تدريبية)\nالمنح التعليمية: منح دراسية لتمكين الطلبة أكاديميًا ومهنيًا ورفع جاهزيتهم لسوق العمل\nمعسكر مسبار العلمي: معسكر علمي لطلاب المرحلة الثانوية لربطهم بالتخصصات الجامعية المستقبلية عبر 9 مسارات علمية\nمبادرة تاكسي التنموي: تمكين اقتصادي وتدريب مهني لأصحاب المشروع\nمبادرة الإسكان التنموي: دعم سكني تنموي للأسر المستفيدة",caveat:""},
+];
+
+const CLASS_LABEL = {green:"دعم استقلالية", red:"مساعدة مالية / أخرى", gray:"غير محدد"};
+const CITY_ORDER = ["الدمام","الخبر"];
+
+let state = { search:"", cls:"all", city:"all" };
+
+// أيقونة SVG حسب التصنيف: حقيبة تدريب (أخضر) / يد عطاء (أحمر) / علامة استفهام (رمادي)
+function classIcon(cls){
+  if(cls === "green"){
+    // حقيبة عمل / تدريب
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/><path d="M12 12v3"/></svg>`;
+  }
+  if(cls === "red"){
+    // يد عطاء / قلب
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5 5 0 0 0-7.1 0L12 6.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 20.3l8.8-8.6a5 5 0 0 0 0-7.1Z"/></svg>`;
+  }
+  // غير محدد
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5"/><circle cx="12" cy="17" r="0.1" fill="currentColor" stroke-width="2.5"/></svg>`;
+}
+
+function renderStats(){
+  const total = DATA.length;
+  const g = DATA.filter(d=>d.cls==="green").length;
+  const r = DATA.filter(d=>d.cls==="red").length;
+  const gr = DATA.filter(d=>d.cls==="gray").length;
+  document.getElementById("statsRow").innerHTML = `
+    <div class="stat-pill"><div class="num">${total}</div><div class="lbl">جمعية مرصودة</div></div>
+    <div class="stat-pill green"><div class="num">${g}</div><div class="lbl">دعم استقلالية</div></div>
+    <div class="stat-pill red"><div class="num">${r}</div><div class="lbl">مساعدة مالية / أخرى</div></div>
+    <div class="stat-pill gray"><div class="num">${gr}</div><div class="lbl">غير محدد</div></div>
+  `;
+}
+
+function renderChips(){
+  const classChips = document.getElementById("classChips");
+  const opts = [["all","الكل",""],["green","دعم استقلالية","c-green"],["red","مساعدة مالية / أخرى","c-red"],["gray","غير محدد","c-gray"]];
+  classChips.innerHTML = opts.map(([v,l,c])=>`<button class="chip ${state.cls===v?'active '+c:''}" data-cls="${v}">${l}</button>`).join("");
+  classChips.querySelectorAll(".chip").forEach(btn=>{
+    btn.addEventListener("click",()=>{ state.cls = btn.dataset.cls; renderChips(); renderMain(); });
+  });
+
+  const cityChips = document.getElementById("cityChips");
+  const cities = ["all", ...CITY_ORDER];
+  cityChips.innerHTML = cities.map(c=>`<button class="chip ${state.city===c?'active':''}" data-city="${c}">${c==="all"?"كل المدن":c}</button>`).join("");
+  cityChips.querySelectorAll(".chip").forEach(btn=>{
+    btn.addEventListener("click",()=>{ state.city = btn.dataset.city; renderChips(); renderMain(); });
+  });
+}
+
+function matches(d){
+  if(state.cls!=="all" && d.cls!==state.cls) return false;
+  if(state.city!=="all" && d.city!==state.city) return false;
+  if(state.search){
+    const q = state.search.trim();
+    if(!d.name.includes(q) && !d.city.includes(q)) return false;
+  }
+  return true;
+}
+
+function renderMain(){
+  const main = document.getElementById("main");
+  const filtered = DATA.filter(matches);
+  if(filtered.length===0){
+    main.innerHTML = `<div class="no-results">لا توجد نتائج مطابقة — جرّب تعديل البحث أو الفلاتر.</div>`;
+    return;
+  }
+  let html = "";
+  CITY_ORDER.forEach(city=>{
+    const items = filtered.filter(d=>d.city===city);
+    if(items.length===0) return;
+    html += `<div class="city-section">
+      <div class="city-title">${city} <span class="count">${items.length} جمعية</span></div>
+      <div class="pearl-divider"></div>
+      <div class="grid">
+        ${items.map(d=>cardHTML(d)).join("")}
+      </div>
+    </div>`;
+  });
+  main.innerHTML = html;
+  main.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("click",()=> openModal(card.dataset.idx));
+    card.addEventListener("keydown",(e)=>{ if(e.key==="Enter") openModal(card.dataset.idx); });
+  });
+}
+
+function cardHTML(d){
+  const idx = DATA.indexOf(d);
+  const teaser = d.quote.split("\n").map(l=>l.trim()).filter(Boolean).join("  •  ");
+  return `<div class="card ${d.cls}" tabindex="0" data-idx="${idx}">
+    <div class="card-body">
+      <span class="badge ${d.cls}">${CLASS_LABEL[d.cls]}</span>
+      <h3>${d.name}</h3>
+      <div class="teaser">${teaser}</div>
+    </div>
+    <div class="seal">${classIcon(d.cls)}</div>
+  </div>`;
+}
+
+function openModal(idx){
+  const d = DATA[idx];
+  document.getElementById("modalTitle").textContent = d.name;
+  document.getElementById("modalBadge").textContent = CLASS_LABEL[d.cls];
+  document.getElementById("modalBadge").className = "badge "+d.cls;
+  document.getElementById("modalSeal").innerHTML = classIcon(d.cls);
+  document.getElementById("modalSeal").className = "seal "+d.cls;
+  document.getElementById("modalCity").textContent = d.city;
+  if(d.license){
+    document.getElementById("modalLicenseRow").style.display="flex";
+    document.getElementById("modalLicense").textContent = d.license;
+  } else {
+    document.getElementById("modalLicenseRow").style.display="none";
+  }
+  const quoteEl = document.getElementById("modalQuote");
+  const lines = d.quote.split("\n").map(l=>l.trim()).filter(Boolean);
+  if(lines.length > 1){
+    quoteEl.innerHTML = "<ul style='margin:0;padding-inline-start:20px;'>" +
+      lines.map(l=>`<li style="margin-bottom:6px;">${l}</li>`).join("") + "</ul>";
+  } else {
+    quoteEl.textContent = d.quote;
+  }
+  document.getElementById("modalCaveat").innerHTML = d.caveat ? `<div class="caveat-flag">${d.caveat}</div>` : "";
+  const linkEl = document.getElementById("modalLink");
+  if(d.url && d.url!=="#"){ linkEl.href = d.url; linkEl.style.display="inline-flex"; }
+  else { linkEl.style.display="none"; }
+  document.getElementById("modalSource").href = d.sourceUrl || "#";
+  document.getElementById("overlay").classList.add("open");
+}
+function closeModal(){ document.getElementById("overlay").classList.remove("open"); }
+document.getElementById("modalClose").addEventListener("click", closeModal);
+document.getElementById("overlay").addEventListener("click",(e)=>{ if(e.target.id==="overlay") closeModal(); });
+document.addEventListener("keydown",(e)=>{ if(e.key==="Escape") closeModal(); });
+
+document.getElementById("search").addEventListener("input",(e)=>{
+  state.search = e.target.value; renderMain();
+});
+
+renderStats();
+renderChips();
+renderMain();
+</script>
+</body>
+</html>
